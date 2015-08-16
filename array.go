@@ -116,6 +116,11 @@ func (a *Array) Get(idx, size int) uint64 {
 	return res & ((1 << uint(size)) - 1)
 }
 
+// Bits returns the underlying array.
+func (a *Array) Bits() []uint64 {
+	return a.bits
+}
+
 // Reset resets the array
 // to its initial state.
 func (a *Array) Reset() {
