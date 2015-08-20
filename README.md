@@ -53,18 +53,20 @@ Here are the results by running ```go test github.com/robskie/bit -bench=.*```
 from terminal.
 
 ```
-BenchmarkAdd7			100000000	        12.5 ns/op
-BenchmarkAdd15			100000000	        14.4 ns/op
-BenchmarkAdd31			100000000	        19.8 ns/op
-BenchmarkAdd63			50000000	        25.0 ns/op
-BenchmarkAddRand		50000000	        21.1 ns/op
-BenchmarkInsertRandIdx	20000000	        66.5 ns/op
-BenchmarkGet7			100000000	        22.6 ns/op
-BenchmarkGet15			100000000	        23.9 ns/op
-BenchmarkGet31			50000000	        24.1 ns/op
-BenchmarkGet63			100000000	        25.1 ns/op
-BenchmarkGetRand		50000000	        29.2 ns/op
-BenchmarkGetRandIdx		30000000	        52.9 ns/op
-BenchmarkMSBIndex		300000000	         4.96 ns/op
-BenchmarkPopCount		500000000	         3.49 ns/op
+BenchmarkAdd7           100000000           12.2 ns/op
+BenchmarkAdd15          100000000           14.6 ns/op
+BenchmarkAdd31          100000000           19.7 ns/op
+BenchmarkAdd63          50000000            24.7 ns/op
+BenchmarkAddRand        100000000           25.8 ns/op
+BenchmarkInsertRandIdx  20000000            63.1 ns/op
+BenchmarkGet7           100000000           22.5 ns/op
+BenchmarkGet15          100000000           23.4 ns/op
+BenchmarkGet31          50000000            24.3 ns/op
+BenchmarkGet63          50000000            24.7 ns/op
+BenchmarkGetRand        50000000            29.2 ns/op
+BenchmarkGetRandIdx     30000000            53.1 ns/op
+BenchmarkMSBIndex       300000000            4.96 ns/op
+BenchmarkPopCount       500000000            3.51 ns/op
+BenchmarkRank           200000000            6.69 ns/op
+BenchmarkSelect         100000000           13.3 ns/op
 ```
