@@ -3,6 +3,7 @@ package bit
 
 import (
 	"bytes"
+	"encoding/gob"
 	"fmt"
 	"strings"
 )
@@ -155,4 +156,28 @@ func (a *Array) String() string {
 	}
 
 	return buf.String()
+}
+
+// GobEncode allows this array
+// to be encoded into gob streams.
+func (a *Array) GobEncode() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	enc := gob.NewEncoder(buf)
+
+	enc.Encode(a.bits)
+	enc.Encode(a.length)
+
+	return buf.Bytes(), nil
+}
+
+// GobDecode allows this array
+// to be decoded from gob streams.
+func (a *Array) GobDecode(data []byte) error {
+	buf := bytes.NewReader(data)
+	dec := gob.NewDecoder(buf)
+
+	dec.Decode(&a.bits)
+	dec.Decode(&a.length)
+
+	return nil
 }

@@ -131,6 +131,27 @@ func TestInsertGetRandom(t *testing.T) {
 	}
 }
 
+func TestEncodeDecode(t *testing.T) {
+	array := NewArray(63 * 1e6)
+	tc := make([]uint64, 1e6)
+
+	for i := range tc {
+		r := uint64(rand.Int63())
+		tc[i] = r
+		array.Add(r, 63)
+	}
+
+	data, _ := array.GobEncode()
+	narray := NewArray(0)
+	narray.GobDecode(data)
+
+	for i := range tc {
+		if !assert.Equal(t, tc[i], narray.Get(i*63, 63)) {
+			break
+		}
+	}
+}
+
 func benchmarkAdd(size int, b *testing.B) {
 	array := NewArray(0)
 	for i := 0; i < b.N; i++ {
