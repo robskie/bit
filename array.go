@@ -164,10 +164,16 @@ func (a *Array) GobEncode() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	enc := gob.NewEncoder(buf)
 
-	enc.Encode(a.bits)
-	enc.Encode(a.length)
+	err := checkErr(
+		enc.Encode(a.bits),
+		enc.Encode(a.length),
+	)
 
-	return buf.Bytes(), nil
+	if err != nil {
+		err = fmt.Errorf("bit: encode failed (%v)", err)
+	}
+
+	return buf.Bytes(), err
 }
 
 // GobDecode allows this array
@@ -176,8 +182,24 @@ func (a *Array) GobDecode(data []byte) error {
 	buf := bytes.NewReader(data)
 	dec := gob.NewDecoder(buf)
 
-	dec.Decode(&a.bits)
-	dec.Decode(&a.length)
+	err := checkErr(
+		dec.Decode(&a.bits),
+		dec.Decode(&a.length),
+	)
+
+	if err != nil {
+		err = fmt.Errorf("bit: decode failed (%v)", err)
+	}
+
+	return err
+}
+
+func checkErr(err ...error) error {
+	for _, e := range err {
+		if e != nil {
+			return e
+		}
+	}
 
 	return nil
 }
